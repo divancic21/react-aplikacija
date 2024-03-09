@@ -1,14 +1,25 @@
-// services/api.js
-import axios from 'axios';
+// react-aplikacija/src/services/api.js
 
-const BASE_URL = 'https://api-football-v1.p.rapidapi.com/v3/timezone';
+const axios = require('axios');
 
-const api = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    'x-rapidapi-key': 'fb1737a277msha39c0e321a04297p1099b6jsn56ec5312e530',
-    'x-rapidapi-host': 'api-football-v1.p.rapidapi.com'
-  }
-});
+const fetchDataFromAPI = async () => {
+    const options = {
+        method: 'GET',
+        url: 'https://api-football-v1.p.rapidapi.com/v3/timezone',
+        headers: {
+            'X-RapidAPI-Key': 'fb1737a277msha39c0e321a04297p1099b6jsn56ec5312e530',
+            'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+        }
+    };
 
+    try {
+        const response = await axios.request(options);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
 
+module.exports = { fetchDataFromAPI };
